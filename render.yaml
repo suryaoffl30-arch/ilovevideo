@@ -24,10 +24,6 @@ services:
           type: redis
           name: video-downloader-redis
           property: connectionString
-    disk:
-      name: downloads
-      mountPath: /app/downloads
-      sizeGB: 1
 
   # Redis Cache
   - type: redis

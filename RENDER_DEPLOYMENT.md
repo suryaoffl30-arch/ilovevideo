@@ -64,12 +64,13 @@ This uses the `render.yaml` file for automatic setup.
    PLAYWRIGHT_TIMEOUT=60000
    ```
 
-3. **Add Disk Storage:**
-   - Go to "Disks" tab
-   - Add disk:
+3. **Disk Storage (Optional - Paid Plans Only):**
+   - Free tier uses temporary storage (/tmp)
+   - Files are deleted on service restart
+   - For persistent storage, upgrade to Starter plan and add disk:
      - **Name:** downloads
      - **Mount Path:** `/app/downloads`
-     - **Size:** 1 GB (free tier)
+     - **Size:** 1 GB+
 
 4. **Health Check:**
    - Path: `/health`
@@ -152,7 +153,7 @@ BACKEND_CORS_ORIGINS=https://video-downloader-web.onrender.com
 - ✅ 750 hours/month of runtime (per service)
 - ✅ Automatic HTTPS
 - ✅ Auto-deploy from GitHub
-- ✅ 1 GB disk storage
+- ✅ Temporary storage (/tmp directory)
 - ✅ 25 MB Redis
 
 ### Limitations:
@@ -160,7 +161,14 @@ BACKEND_CORS_ORIGINS=https://video-downloader-web.onrender.com
 - ⚠️ Cold start takes 30-60 seconds
 - ⚠️ 512 MB RAM per service
 - ⚠️ Shared CPU
+- ⚠️ **No persistent disk storage** (files deleted on restart)
 - ⚠️ No custom domains on free tier
+
+### Important: File Storage on Free Tier
+- Downloaded files are stored in `/tmp` (temporary storage)
+- Files are automatically deleted when service restarts or spins down
+- This works fine for a video downloader since files are immediately served to users
+- For persistent storage, upgrade to Starter plan ($7/month) which includes disk storage
 
 ### Workarounds:
 

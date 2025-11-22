@@ -45,10 +45,9 @@ Deploy your video downloader to Render in 5 minutes!
    ```
    BACKEND_CORS_ORIGINS=https://YOUR-FRONTEND-URL.onrender.com
    ```
-5. Add disk (Disks tab):
-   - **Mount Path:** `/app/downloads`
-   - **Size:** 1 GB
-6. Click "Create Web Service"
+5. Click "Create Web Service"
+
+**Note:** Free tier doesn't support persistent disks. The app uses `/tmp` for temporary storage, which is perfect for a video downloader since files are served immediately.
 
 ### Step 2: Deploy Frontend
 
@@ -78,7 +77,8 @@ Go back to backend service and update `BACKEND_CORS_ORIGINS` with the actual fro
 - Services spin down after 15 minutes of inactivity
 - First request after spin down takes 30-60 seconds (cold start)
 - 512 MB RAM per service
-- 1 GB disk storage
+- No persistent disk storage (uses /tmp - files deleted on restart)
+- This is fine for video downloads since files are served immediately
 
 ### Recommended for Production:
 - Upgrade backend to Starter plan ($7/month) for:
