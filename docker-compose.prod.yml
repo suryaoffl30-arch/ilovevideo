@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  video-downloader:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: video-downloader-prod
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - WORKERS=4
+      - LOG_LEVEL=info
+      - MAX_DOWNLOAD_SIZE=500MB
+      - CLEANUP_DAYS=1
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./data/downloads:/tmp/downloads
+      - ./data/logs:/app/logs
+      - ./data/temp:/tmp
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+        reservations:
+          cpus: '1'
+          memory: 2G
+
+  redis:
+    image: redis:7-alpine
+    container_name: video-downloader-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+
+  nginx:
+    image: nginx:alpine
+    container_name: video-downloader-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.prod.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - ./data/logs/nginx:/var/log/nginx
+    depends_on:
+      - video-downloader
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+volumes:
+  redis-data:
+    driver: local

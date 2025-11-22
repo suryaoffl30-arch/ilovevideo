@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+button {
+  padding: 0.75rem 2rem;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover:not(:disabled) {
+  background: #5568d3;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.result {
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.result.verified {
+  background: #d4edda;
+  border: 2px solid #28a745;
+}
+
+.result.warning {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+}
+
+.result .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.result h3 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.result p {
+  margin: 0.5rem 0;
+  color: #555;
+}
+
+.result a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.result a:hover {
+  text-decoration: underline;
+}
+
+.search-results {
+  margin-top: 1rem;
+}
+
+.search-results h3 {
+  color: #667eea;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.search-result-item {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #667eea;
+}
+
+.search-result-item h4 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.search-result-item p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-result-item a {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.search-result-item a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .input-group {
+    flex-direction: column;
+  }
+
+  button {
+    width: 100%;
+  }
+}
